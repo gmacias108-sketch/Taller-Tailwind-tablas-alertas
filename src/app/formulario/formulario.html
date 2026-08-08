@@ -1,0 +1,69 @@
+<h1 class="text-lg font-bold">Crear Producto</h1>
+<br>
+
+<form (ngSubmit)="guardarProducto()">
+  
+  <label>Código:</label><br>
+  <input 
+    type="number" 
+    [(ngModel)]="nuevoProducto.codigo" 
+    name="codigo" 
+    required 
+    class="border"
+  >
+  <br><br>
+
+  <label>Descripción:</label><br>
+  <input 
+    type="text" 
+    [(ngModel)]="nuevoProducto.descripcion" 
+    name="descripcion" 
+    required 
+    class="border"
+  >
+  <br><br>
+
+  <label>Proveedor:</label><br>
+  <input 
+    type="text" 
+    [(ngModel)]="nuevoProducto.proveedor" 
+    name="proveedor" 
+    required 
+    class="border"
+  >
+  <br><br>
+
+  <label>Precio Costo:</label><br>
+  <input 
+    type="number" 
+    [(ngModel)]="nuevoProducto.precioCosto" 
+    name="precioCosto" 
+    required 
+    class="border"
+  >
+  <br><br>
+
+  <label>Precio Venta:</label><br>
+  <input 
+    type="number" 
+    [(ngModel)]="nuevoProducto.precioVenta" 
+    name="precioVenta" 
+    required 
+    class="border"
+  >
+  <br><br>
+
+  <label>Foto (URL):</label><br>
+  <input 
+    type="text" 
+    [(ngModel)]="nuevoProducto.foto" 
+    name="foto" 
+    class="border"
+  >
+  <br><br>
+
+  <button type="submit" class="bg-gray-200 border px-4 py-1">
+    Guardar
+  </button>
+
+</form>
