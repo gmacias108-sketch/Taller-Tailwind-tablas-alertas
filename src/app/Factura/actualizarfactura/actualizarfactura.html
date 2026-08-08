@@ -1,1 +1,31 @@
-<p>actualizarfactura works!</p>
+<h1>ACTUALIZAR FACTURA</h1>
+
+<form (ngSubmit)="actualizarFactura()">
+
+<input
+    name="no_factura"
+    placeholder="Número de factura"
+    [(ngModel)]="factura.no_factura"
+>
+
+<input
+    type="date"
+    name="fecha"
+    [(ngModel)]="factura.fecha"
+>
+
+<input
+    name="cod_cliente"
+    placeholder="Código del cliente"
+    [(ngModel)]="factura.cod_cliente"
+>
+
+<input
+    name="total_factura"
+    placeholder="Total de factura"
+    [(ngModel)]="factura.total_factura"
+>
+
+<button type="submit">Actualizar</button>
+
+</form>
