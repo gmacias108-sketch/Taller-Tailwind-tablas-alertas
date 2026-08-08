@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './formulario-proveedor.html',
-  styleUrl: './formulario-proveedor.css'
+  styleUrls: []
 })
 export class FormularioProveedorComponent {
   // Variables para capturar los datos del formulario

@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-formulario-cliente',
   imports: [FormsModule],
-  templateUrl: './formulario-cliente.html',
-  styleUrl: './formulario-cliente.css',
+  templateUrl: './formulariocliente.html',
+  styleUrls: []
 })
 export class FormularioCliente {
 
