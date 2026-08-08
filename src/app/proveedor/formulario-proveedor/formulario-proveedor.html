@@ -1,0 +1,24 @@
+<div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg mt-10">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Registrar Proveedor</h2>
+  
+  <form class="space-y-4">
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700">Nombre del Proveedor</label>
+      <input type="text" [(ngModel)]="nombre" name="nombre" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej. Comercializadora S.A.">
+    </div>
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700">Teléfono</label>
+      <input type="text" [(ngModel)]="telefono" name="telefono" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej. 3123456789">
+    </div>
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700">Dirección</label>
+      <input type="text" [(ngModel)]="direccion" name="direccion" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej. Calle 5 # 4-20">
+    </div>
+
+    <button type="button" (click)="guardarProveedor()" class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-700 transition">
+      Guardar Proveedor
+    </button>
+  </form>
+</div>
