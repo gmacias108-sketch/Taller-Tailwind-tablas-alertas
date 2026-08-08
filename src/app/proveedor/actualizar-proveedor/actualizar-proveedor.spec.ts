@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActualizarProveedor } from './actualizar-proveedor';
+import { ActualizarProveedorComponent } from './actualizar-proveedor';
 
 describe('ActualizarProveedor', () => {
-  let component: ActualizarProveedor;
-  let fixture: ComponentFixture<ActualizarProveedor>;
+  let component: ActualizarProveedorComponent;
+  let fixture: ComponentFixture<ActualizarProveedorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ActualizarProveedor],
+      imports: [ActualizarProveedorComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ActualizarProveedor);
+    fixture = TestBed.createComponent(ActualizarProveedorComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

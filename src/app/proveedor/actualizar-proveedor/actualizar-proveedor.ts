@@ -1,52 +1,90 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-actualizar-proveedor',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './actualizar-proveedor.html'
+  imports: [FormsModule, CommonModule],
+  templateUrl: './actualizar-proveedor.html',
+  styleUrls: []
 })
 export class ActualizarProveedorComponent implements OnInit {
-  
-  codigoId: any;
-  nombre_proveedor: string = '';
-  telefono: string = '';
-  direccion: string = '';
+  proveedor = {
+    nombre: '',
+    telefono: '',
+    direccion: '',
+    nit: ''
+  };
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  idProveedor: any;
+  alertaVisible = false;
+  mensajeAlerta = '';
 
-  ngOnInit(): void {
-    this.codigoId = Number(this.route.snapshot.paramMap.get('id'));
-    const proveedores = JSON.parse(localStorage.getItem('lista_proveedores') || '[]');
-    const proveedorEncontrado = proveedores.find((p: any) => p.codigo_proveedor === this.codigoId);
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-    if (proveedorEncontrado) {
-      this.nombre_proveedor = proveedorEncontrado.nombre_proveedor;
-      this.telefono = proveedorEncontrado.telefono;
-      this.direccion = proveedorEncontrado.direccion;
+  ngOnInit() {
+    // Captura el ID que viene por la URL (ej: /proveedores/actualizar?id=1 o similar)
+    this.idProveedor = this.route.snapshot.queryParamMap.get('id');
+    if (this.idProveedor) {
+      this.cargarDatosProveedor();
     }
   }
 
-  actualizarDatos() {
-    let proveedores = JSON.parse(localStorage.getItem('lista_proveedores') || '[]');
-    
-    proveedores = proveedores.map((p: any) => {
-      if (p.codigo_proveedor === this.codigoId) {
-        return {
-          codigo_proveedor: this.codigoId,
-          nombre_proveedor: this.nombre_proveedor,
-          telefono: this.telefono,
-          direccion: this.direccion
-        };
+  cargarDatosProveedor() {
+    this.http.get<any[]>(
+      `https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/proveedores?id=eq.${this.idProveedor}&select=*`,
+      {
+        headers: {
+          apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+          Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x'
+        }
       }
-      return p;
+    ).subscribe({
+      next: (data) => {
+        if (data.length > 0) {
+          this.proveedor = data[0];
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar proveedor', err);
+      }
     });
+  }
 
-    localStorage.setItem('lista_proveedores', JSON.stringify(proveedores));
-    alert('¡Proveedor actualizado correctamente!');
-    this.router.navigate(['/listar-proveedor']);
+  actualizarProveedor() {
+    this.http.patch(
+      `https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/proveedores?id=eq.${this.idProveedor}`,
+      this.proveedor,
+      {
+        headers: {
+          apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+          Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation'
+        }
+      }
+    ).subscribe({
+      next: () => {
+        this.mensajeAlerta = '¡Proveedor actualizado correctamente!';
+        this.alertaVisible = true;
+        
+        // Redirige al listado después de 2 segundos para que se vea la alerta
+        setTimeout(() => {
+          this.router.navigate(['/proveedores']);
+        }, 2000);
+      },
+      error: (err) => {
+        console.error('Error al actualizar', err);
+        this.mensajeAlerta = 'Error al actualizar el proveedor.';
+        this.alertaVisible = true;
+      }
+    });
   }
 }

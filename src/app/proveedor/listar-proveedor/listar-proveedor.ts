@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -6,40 +7,64 @@ import { RouterModule } from '@angular/router';
   selector: 'app-listar-proveedor',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './listar-proveedor.html'
+  templateUrl: './listar-proveedor.html',
+  styleUrls: []
 })
 export class ListarProveedorComponent implements OnInit {
-  
   proveedores: any[] = [];
-  showAlert: boolean = true;
-  alertMessage: string = 'Módulo de proveedores cargado correctamente.';
+  alertaVisible = false;
+  mensajeAlerta = '';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    // Recuperamos los proveedores guardados en el almacenamiento local o simulamos datos iniciales
-    const datosGuardados = localStorage.getItem('lista_proveedores');
-    if (datosGuardados) {
-      this.proveedores = JSON.parse(datosGuardados);
-    } else {
-      this.proveedores = [
-        { codigo_proveedor: 1, nombre_proveedor: 'Distribuciones del Cauca', telefono: '8321122', direccion: 'Carrera 4 # 2-15' },
-        { codigo_proveedor: 2, nombre_proveedor: 'Comercializadora Global', telefono: '8234455', direccion: 'Calle 8 # 12-40' }
-      ];
-      localStorage.setItem('lista_proveedores', JSON.stringify(this.proveedores));
-    }
+  ngOnInit() {
+    this.cargarProveedores();
   }
 
-  eliminarProveedor(codigo: number) {
-    if (confirm('¿Estás segura de que deseas eliminar este proveedor?')) {
-      this.proveedores = this.proveedores.filter(p => p.codigo_proveedor !== codigo);
-      localStorage.setItem('lista_proveedores', JSON.stringify(this.proveedores));
-      this.alertMessage = 'Proveedor eliminado con éxito.';
-      this.showAlert = true;
-    }
+  cargarProveedores() {
+    this.http.get<any[]>(
+      'https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/proveedores?select=*',
+      {
+        headers: {
+          apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+          Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x'
+        }
+      }
+    ).subscribe({
+      next: (data) => {
+        this.proveedores = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar proveedores', err);
+        this.mensajeAlerta = 'Error al cargar los datos de la tabla.';
+        this.alertaVisible = true;
+      }
+    });
   }
 
-  cerrarAlerta() {
-    this.showAlert = false;
+  eliminar(id: number) {
+    if (confirm('¿Estás segura de eliminar este proveedor?')) {
+      this.http.delete(
+        `https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/proveedores?id=eq.${id}`,
+        {
+          headers: {
+            apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+            Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x'
+          }
+        }
+      ).subscribe({
+        next: () => {
+          this.mensajeAlerta = 'Proveedor eliminado correctamente.';
+          this.alertaVisible = true;
+          this.cargarProveedores(); // Recarga la tabla de inmediato
+          setTimeout(() => { this.alertaVisible = false; }, 4000);
+        },
+        error: (err) => {
+          console.error('Error al eliminar', err);
+          this.mensajeAlerta = 'No se pudo eliminar el proveedor.';
+          this.alertaVisible = true;
+        }
+      });
+    }
   }
 }

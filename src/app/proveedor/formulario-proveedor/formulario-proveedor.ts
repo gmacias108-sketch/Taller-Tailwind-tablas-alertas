@@ -1,32 +1,55 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-proveedor',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './formulario-proveedor.html',
   styleUrls: []
 })
 export class FormularioProveedorComponent {
-  // Variables para capturar los datos del formulario
-  nombre: string = '';
-  telefono: string = '';
-  direccion: string = '';
+  nuevoproveedor = {
+    nombre: '',
+    telefono: '',
+    direccion: '',
+    nit: ''
+  };
 
-  constructor(private router: Router) {}
+  alertaVisible = false;
+  mensajeAlerta = '';
 
-  guardarProveedor() {
-    // Aquí puedes ver los datos en la consola del navegador (F12 -> Console)
-    console.log('Guardando proveedor:', {
-      nombre: this.nombre,
-      telefono: this.telefono,
-      direccion: this.direccion
+  constructor(private http: HttpClient) {}
+
+  guardarproveedor() {
+    this.http.post(
+      'https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/proveedores',
+      this.nuevoproveedor,
+      {
+        headers: {
+          apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+          Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation'
+        }
+      }
+    ).subscribe({
+      next: () => {
+        this.mensajeAlerta = '¡Proveedor guardado correctamente!';
+        this.alertaVisible = true;
+        // Limpiar formulario opcionalmente
+        this.nuevoproveedor = { nombre: '', telefono: '', direccion: '', nit: '' };
+        
+        // Ocultar alerta a los 4 segundos
+        setTimeout(() => { this.alertaVisible = false; }, 4000);
+      },
+      error: (err) => {
+        console.error(err);
+        this.mensajeAlerta = 'Error al guardar el proveedor.';
+        this.alertaVisible = true;
+      }
     });
-
-    // Redirigir de vuelta al listado después de guardar
-    this.router.navigate(['/proveedores']);
   }
 }
