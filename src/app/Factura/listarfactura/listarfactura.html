@@ -1,1 +1,31 @@
-<p>listarfactura works!</p>
+<h1>LISTAR FACTURA</h1>
+
+<table> <thead> <tr> <th>ID</th> <th>No. Factura</th> <th>Fecha</th> <th>Código Cliente</th> <th>Total Factura</th> </tr> </thead>
+
+<tbody>
+
+    <tr *ngFor="let factura of facturas">
+
+        <td>{{factura.id}}</td>
+        <td>{{factura.no_factura}}</td>
+        <td>{{factura.fecha}}</td>
+        <td>{{factura.cod_cliente}}</td>
+        <td>{{factura.total_factura}}</td>
+
+        <td>
+            <button (click)="eliminarFactura(factura.id)">
+                eliminar
+            </button>
+        </td>
+
+        <td>
+            <button (click)="llevarActualizar(factura.id)">
+                actualizar
+            </button>
+        </td>
+
+    </tr>
+
+</tbody>
+
+</table>

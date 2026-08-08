@@ -1,1 +1,31 @@
-<p>formulariofactura works!</p>
+<h1>Crear Factura</h1>
+
+<form (ngSubmit)="guardarfactura()">
+
+<input
+    placeholder="Escribir número de factura"
+    name="no_factura"
+    [(ngModel)]="nuevaFactura.no_factura"
+>
+
+<input
+    type="date"
+    name="fecha"
+    [(ngModel)]="nuevaFactura.fecha"
+>
+
+<input
+    placeholder="Escribir código del cliente"
+    name="cod_cliente"
+    [(ngModel)]="nuevaFactura.cod_cliente"
+>
+
+<input
+    placeholder="Escribir total de factura"
+    name="total_factura"
+    [(ngModel)]="nuevaFactura.total_factura"
+>
+
+<button type="submit">Guardar</button>
+
+</form>
