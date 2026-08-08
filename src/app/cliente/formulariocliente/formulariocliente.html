@@ -1,16 +1,39 @@
 <h1 class="text-xl font-semibold">Crear cliente</h1>
-  <form class="space-y-3" (ngSubmit)="guardarcliente()">
-    <input class="w-full rounded-md border border-slate-300 px-3 py-2" placeholder="Escribir el nombre" name="nombre" 
-    [(ngModel)]="nuevocliente.nombre">
-    <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Escribir el teléfono" name="telefono" 
-    [(ngModel)]="nuevocliente.telefono">
-    <input class="w-full rounded-md border border-slate-300 px-3 py-2" placeholder="Escribir la dirección" name="direccion" 
-    [(ngModel)]="nuevocliente.direccion">
-    <input class="w-full rounded-md border border-slate-300 px-3 py-2" placeholder="Escribir el NIT" name="nit" 
-    [(ngModel)]="nuevocliente.nit">
-    <button class="rounded-md bg-slate-900 px-4 py-2 text-white" 
-    type="submit">Guardar</button>
-  </form>
 
+<form class="space-y-3" (ngSubmit)="guardarcliente()">
 
+  <input
+    class="w-full rounded-md border border-slate-300 px-3 py-2"
+    placeholder="Escribir el nombre"
+    name="nombre"
+    [(ngModel)]="nuevocliente.nombre"
+  >
 
+  <input
+    class="w-full rounded-md border border-slate-300 px-3 py-2"
+    placeholder="Escribir el teléfono"
+    name="telefono"
+    [(ngModel)]="nuevocliente.telefono"
+  >
+
+  <input
+    class="w-full rounded-md border border-slate-300 px-3 py-2"
+    placeholder="Escribir la dirección"
+    name="direccion"
+    [(ngModel)]="nuevocliente.direccion"
+  >
+
+  <input
+    class="w-full rounded-md border border-slate-300 px-3 py-2"
+    placeholder="Escribir el NIT"
+    name="nit"
+    [(ngModel)]="nuevocliente.nit"
+  >
+
+  <button
+    class="rounded-md bg-slate-900 px-4 py-2 text-white"
+    type="submit">
+    Guardar
+  </button>
+
+</form>

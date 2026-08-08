@@ -10,22 +10,28 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './actualizar-cliente.css',
 })
 export class ActualizarCliente {
-  id:number=0
-  cliente={
-    cod_cliente:0,
-    nit:"",
-    nombre:"",
-    telefono:"",
-    direccion:""
+
+  id: number = 0;
+
+  cliente = {
+    cod_cliente: 0,
+    nit: '',
+    nombre: '',
+    telefono: '',
+    direccion: ''
+  };
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.id = Number(this.route.snapshot.params['id']);
   }
-  constructor(private http:HttpClient,
-              private router:Router,
-              private route:ActivatedRoute
-  ){}
-  ngOnInit(){
-    this.id=this.route.snapshot.params['id']
-  }
-  actualizarCliente(){
+
+  actualizarCliente() {
     this.http.patch(
       `https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/cliente?cod_cliente=eq.${this.id}`,
       this.cliente,

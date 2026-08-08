@@ -1,14 +1,14 @@
+<h1 class="text-xl font-semibold">Actualizar cliente</h1>
 
-  <h1 class="text-xl font-semibold">Actualizar cliente</h1>
-  <form class="space-y-3" (ngSubmit)="actualizarCliente()">
-    <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="NIT" name="nit" 
+<form class="space-y-3" (ngSubmit)="actualizarCliente()">
+  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="NIT" name="nit" 
     [(ngModel)]="cliente.nit">
-    <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Nombre" name="nombre" 
+  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Nombre" name="nombre"
     [(ngModel)]="cliente.nombre">
-    <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Teléfono" name="telefono" 
+  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Teléfono" name="telefono"
     [(ngModel)]="cliente.telefono">
-    <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Dirección" name="direccion" 
+  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Dirección" name="direccion"
     [(ngModel)]="cliente.direccion">
-    <button class="rounded-md bg-slate-900 px-4 py-2 text-white" type="submit">Actualizar</button>
-  </form>
-
+  <button class="rounded-md bg-slate-900 px-4 py-2 text-white"type="submit">
+    Actualizar</button>
+</form>
