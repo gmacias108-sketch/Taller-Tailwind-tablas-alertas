@@ -6,10 +6,9 @@ import { Formulariofactura } from './Factura/formulariofactura/formulariofactura
 import { Listarfactura } from './Factura/listarfactura/listarfactura';
 import { Actualizarfactura } from './Factura/actualizarfactura/actualizarfactura';
 // 1. Importa tus componentes de proveedores
-import { ListarProveedorComponent } from './listar-proveedor/listar-proveedor';
-import { FormularioProveedorComponent } from './formulario-proveedor/formulario-proveedor';
-import { ActualizarProveedorComponent } from './actualizar-proveedor/actualizar-proveedor';
-
+import { ListarProveedorComponent } from './proveedor/listar-proveedor/listar-proveedor';
+import { FormularioProveedorComponent } from './proveedor/formulario-proveedor/formulario-proveedor';
+import { ActualizarProveedorComponent } from './proveedor/actualizar-proveedor/actualizar-proveedor';
 
 export const routes: Routes = [
 
