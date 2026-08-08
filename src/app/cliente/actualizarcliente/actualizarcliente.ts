@@ -6,8 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-actualizar-cliente',
   imports: [FormsModule],
-  templateUrl: './actualizar-cliente.html',
-  styleUrl: './actualizar-cliente.css',
+  templateUrl: './actualizarcliente.html',
+  styleUrls: []
 })
 export class ActualizarCliente {
 

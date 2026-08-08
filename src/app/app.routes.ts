@@ -9,6 +9,10 @@ import { Actualizarfactura } from './Factura/actualizarfactura/actualizarfactura
 import { ListarProveedorComponent } from './proveedor/listar-proveedor/listar-proveedor';
 import { FormularioProveedorComponent } from './proveedor/formulario-proveedor/formulario-proveedor';
 import { ActualizarProveedorComponent } from './proveedor/actualizar-proveedor/actualizar-proveedor';
+// componentes de cliente
+import { FormularioCliente } from './cliente/formulariocliente/formulariocliente';
+import { ActualizarCliente } from './cliente/actualizarcliente/actualizarcliente';
+import { ListarCliente } from './cliente/listarcliente/listarcliente';
 
 export const routes: Routes = [
 
@@ -56,6 +60,18 @@ export const routes: Routes = [
   {
     path: 'actualizarfactura/:id',
     component: Actualizarfactura
+  },
+  {
+    path:'formulariocliente',
+    component:FormularioCliente
+  },
+  {
+    path:'actualizarcliente/:id',
+    component:ActualizarCliente
+  },
+  {
+    path:'listarcliente',
+    component:ListarCliente
   }
 
 ];
