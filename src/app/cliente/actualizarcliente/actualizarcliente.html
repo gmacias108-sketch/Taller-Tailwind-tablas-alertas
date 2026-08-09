@@ -1,14 +1,37 @@
-<h1 class="text-xl font-semibold">Actualizar cliente</h1>
+<div class="max-w-lg mx-auto mt-10">
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    
+    <h1 class="text-2xl font-bold text-slate-800 mb-6">Actualizar Cliente</h1>
 
-<form class="space-y-3" (ngSubmit)="actualizarCliente()">
-  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="NIT" name="nit" 
-    [(ngModel)]="cliente.nit">
-  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Nombre" name="nombre"
-    [(ngModel)]="cliente.nombre">
-  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Teléfono" name="telefono"
-    [(ngModel)]="cliente.telefono">
-  <input class="w-full rounded-md border-slate-300 px-3 py-2" placeholder="Dirección" name="direccion"
-    [(ngModel)]="cliente.direccion">
-  <button class="rounded-md bg-slate-900 px-4 py-2 text-white"type="submit">
-    Actualizar</button>
-</form>
+    <form class="space-y-4" (ngSubmit)="actualizarCliente()">
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">NIT</label>
+        <input class="w-full rounded-md border-slate-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+          placeholder="NIT" name="nit" [(ngModel)]="cliente.nit" required>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Nombre</label>
+        <input class="w-full rounded-md border-slate-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+          placeholder="Nombre" name="nombre" [(ngModel)]="cliente.nombre" required>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Teléfono</label>
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+          placeholder="Teléfono" name="telefono" [(ngModel)]="cliente.telefono">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Dirección</label>
+        <input class="w-full rounded-md border border-slate-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
+          placeholder="Dirección" name="direccion" [(ngModel)]="cliente.direccion">
+      </div>
+
+      <button class="w-full rounded-md bg-slate-900 hover:bg-slate-800 px-4 py-2 text-white font-semibold transition" type="submit">
+        Actualizar
+      </button>
+    </form>
+
+  </div>
+</div>

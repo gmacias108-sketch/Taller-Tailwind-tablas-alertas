@@ -1,71 +1,48 @@
-<div class="space-y-4 rounded-lg border-slate-200 p-6">
+<div class="max-w-7xl mx-auto p-6">
 
-  <h1 class="text-2xl font-semibold text-slate-900">
-    LISTAR CLIENTE
-  </h1>
+  <h1 class="text-2xl font-bold text-slate-900 mb-6">LISTAR CLIENTES</h1>
 
-  <div *ngIf="clientes.length === 0" class="text-center text-slate-600">
+  <!-- Mensaje cuando está vacío -->
+  <div *ngIf="clientes.length === 0" class="text-center p-8 bg-white rounded-lg shadow-md text-slate-600">
     No hay clientes registrados
   </div>
 
-  <div class="overflow-x-auto" *ngIf="clientes.length > 0">
-
-    <table class="w-full border-collapse rounded-lg border-slate-300">
+  <!-- Tabla -->
+  <div class="overflow-x-auto bg-white rounded-lg shadow-md" *ngIf="clientes.length > 0">
+    <table class="w-full border-collapse">
 
       <thead class="bg-slate-900 text-white">
         <tr>
-          <th class="border border-slate-300 px-4 py-2 text-left">ID</th>
-          <th class="border border-slate-300 px-4 py-2 text-left">NIT</th>
-          <th class="border border-slate-300 px-4 py-2 text-left">Nombre</th>
-          <th class="border border-slate-300 px-4 py-2 text-left">Telefono</th>
-          <th class="border border-slate-300 px-4 py-2 text-left">Direccion</th>
-          <th class="border border-slate-300 px-4 py-2 text-center">Acciones</th>
+          <th class="px-4 py-3 text-left">ID</th>
+          <th class="px-4 py-3 text-left">NIT</th>
+          <th class="px-4 py-3 text-left">Nombre</th>
+          <th class="px-4 py-3 text-left">Teléfono</th>
+          <th class="px-4 py-3 text-left">Dirección</th>
+          <th class="px-4 py-3 text-center">Acciones</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let cliente of clientes" class="hover:bg-slate-50">
+        <tr *ngFor="let cliente of clientes" class="border-b border-slate-200 hover:bg-slate-50 transition">
 
-          <td class="border border-slate-300 px-4 py-2">
-            {{ cliente.cod_cliente }}
-          </td>
+          <td class="px-4 py-3 font-semibold">{{ cliente.cod_cliente }}</td>
+          <td class="px-4 py-3">{{ cliente.nit }}</td>
+          <td class="px-4 py-3">{{ cliente.nombre }}</td>
+          <td class="px-4 py-3">{{ cliente.telefono }}</td>
+          <td class="px-4 py-3">{{ cliente.direccion }}</td>
 
-          <td class="border border-slate-300 px-4 py-2">
-            {{ cliente.nit }}
-          </td>
-
-          <td class="border border-slate-300 px-4 py-2">
-            {{ cliente.nombre }}
-          </td>
-
-          <td class="border border-slate-300 px-4 py-2">
-            {{ cliente.telefono }}
-          </td>
-
-          <td class="border border-slate-300 px-4 py-2">
-            {{ cliente.direccion }}
-          </td>
-
-          <td class="border border-slate-300 px-4 py-2 text-center space-x-2">
+          <td class="px-4 py-3 text-center space-x-2">
+            <button
+              (click)="llevarActualizar(cliente.cod_cliente)"
+              class="rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700 transition">
+              Editar
+            </button>
 
             <button
               (click)="eliminar(cliente.cod_cliente)"
-              class="rounded bg-red-500 px-2 py-1 text-sm text-white hover:bg-red-600">
-              eliminar
+              class="rounded-md bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700 transition">
+              Eliminar
             </button>
-
-            <button
-              (click)="llevarActualizar(cliente.cod_cliente)"
-              class="rounded bg-blue-500 px-2 py-1 text-sm text-white hover:bg-blue-600">
-              actualizar
-            </button>
-
-            <button
-              [routerLink]="['/actualizar-cliente', cliente.cod_cliente]"
-              class="rounded bg-green-500 px-2 py-1 text-sm text-white hover:bg-green-600">
-              actualizar con routerlink
-            </button>
-
           </td>
         </tr>
       </tbody>

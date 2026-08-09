@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
+
 import { Formulario } from './formulario/formulario';
 import { Listar } from './listar/listar';
 import { Actualizar } from './actualizar/actualizar';
+
 import { Formulariofactura } from './Factura/formulariofactura/formulariofactura';
 import { Listarfactura } from './Factura/listarfactura/listarfactura';
 import { Actualizarfactura } from './Factura/actualizarfactura/actualizarfactura';

@@ -2,6 +2,8 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 import {provideHttpClient} from '@angular/common/http';
 import { routes } from './app.routes';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+imports: [SweetAlert2Module]
 
 export const appConfig: ApplicationConfig = {
   providers: [
