@@ -1,79 +1,39 @@
 import { Routes } from '@angular/router';
 
-import { Formulario } from './formulario/formulario';
-import { Listar } from './listar/listar';
-import { Actualizar } from './actualizar/actualizar';
-
+// Factura
 import { Formulariofactura } from './Factura/formulariofactura/formulariofactura';
 import { Listarfactura } from './Factura/listarfactura/listarfactura';
 import { Actualizarfactura } from './Factura/actualizarfactura/actualizarfactura';
-// 1. Importa tus componentes de proveedores
+
+// Producto
+import { Formulario } from './producto/formularioproducto/formularioproducto';
+import { Listar } from './producto/listarproducto/listarproducto';
+import { Actualizar } from './producto/actualizarproducto/actualizarproducto';
+
+// Proveedores
 import { ListarProveedorComponent } from './proveedor/listar-proveedor/listar-proveedor';
 import { FormularioProveedorComponent } from './proveedor/formulario-proveedor/formulario-proveedor';
 import { ActualizarProveedorComponent } from './proveedor/actualizar-proveedor/actualizar-proveedor';
-// componentes de cliente
+
+// Cliente
 import { FormularioCliente } from './cliente/formulariocliente/formulariocliente';
 import { ActualizarCliente } from './cliente/actualizarcliente/actualizarcliente';
 import { ListarCliente } from './cliente/listarcliente/listarcliente';
 
 export const routes: Routes = [
+  { path: '', component: Formulariofactura },
+  { path: 'listarfactura', component: Listarfactura },
+  { path: 'actualizarfactura/:id', component: Actualizarfactura },
 
-  {
-    path: 'productos',
-    component: Listar
-  },
+  { path: 'productos', component: Listar },
+  { path: 'productos/crear', component: Formulario },
+  { path: 'productos/actualizar/:codigo', component: Actualizar },
 
-  {
-    path: 'productos/crear',
-    component: Formulario
-  },
+  { path: 'proveedores', component: ListarProveedorComponent },
+  { path: 'proveedores/crear', component: FormularioProveedorComponent },
+  { path: 'proveedores/actualizar/:id', component: ActualizarProveedorComponent },
 
-  {
-    path: 'productos/actualizar',
-    component: Actualizar
-  },
-
-  // 2. Añade las rutas de proveedores aquí mismo
-  {
-    path: 'proveedores',
-    component: ListarProveedorComponent
-  },
-
-  {
-    path: 'proveedores/crear',
-    component: FormularioProveedorComponent
-  },
-
-  {
-    path: 'proveedores/actualizar/:id',
-    component: ActualizarProveedorComponent
-  },
-
-  {
-    path: '',
-    component: Formulariofactura
-  },
-
-  {
-    path: 'listarfactura',
-    component: Listarfactura
-  },
-
-  {
-    path: 'actualizarfactura/:id',
-    component: Actualizarfactura
-  },
-  {
-    path:'formulariocliente',
-    component:FormularioCliente
-  },
-  {
-    path:'actualizarcliente/:id',
-    component:ActualizarCliente
-  },
-  {
-    path:'listarcliente',
-    component:ListarCliente
-  }
-
+  { path: 'formulariocliente', component: FormularioCliente },
+  { path: 'actualizarcliente/:id', component: ActualizarCliente },
+  { path: 'listarcliente', component: ListarCliente }
 ];
