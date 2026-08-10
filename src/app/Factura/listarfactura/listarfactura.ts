@@ -1,77 +1,53 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 interface Factura {
-id: number;
-no_factura: string;
-fecha: string;
-cod_cliente: string;
-total_factura: string;
+  id: number;
+  no_factura: string;
+  fecha: string;
+  cod_cliente: number;
+  total_factura: number;
 }
 
 @Component({
-selector: 'app-listarfactura',
-imports: [CommonModule],
-templateUrl: './listarfactura.html',
+  selector: 'app-listarfactura',
+  standalone: true,
+  imports: [CommonModule, RouterLink, HttpClientModule],
+  templateUrl: './listarfactura.html',
 })
-
 export class Listarfactura {
+  facturas: Factura[] = [];
 
-facturas: Factura[] = [];
+  constructor(private http: HttpClient, private router: Router) {}
 
-constructor(
-private http: HttpClient,
-private cdr: ChangeDetectorRef,
-private router: Router
-) {}
+  ngOnInit() {
+    this.traerFacturas();
+  }
 
-ngOnInit() {
-this.traerFacturas();
-}
+  traerFacturas() {
+    this.http.get<Factura[]>(
+      'https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/factura',
+      { headers: { apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x', Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x' } }
+    ).subscribe({
+      next: (res) => this.facturas = res,
+      error: () => Swal.fire('Error', 'No se pudieron cargar las facturas', 'error')
+    });
+  }
 
-traerFacturas() {
-this.http.get<Factura[]>(
-"https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/factura",
-{
-headers: {
-apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
-Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
-'Content-Type': 'application/json'
-}
-}
-)
-.subscribe({
-next: (respuesta) => {
-console.log(respuesta);
-this.facturas = respuesta;
-this.cdr.detectChanges();
-}
-});
-}
-
-eliminarFactura(id: number) {
-this.http.delete(
-"https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/factura?id=eq." + id,
-{
-headers: {
-apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
-Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x',
-'Content-Type': 'application/json'
-}
-}
-)
-.subscribe({
-next: (respuesta) => {
-alert("Registro eliminado " + respuesta + " id " + id);
-this.traerFacturas();
-this.cdr.detectChanges();
-}
-});
-}
-
-llevarActualizar(id: number) {
-this.router.navigate(['/actualizarfactura', id]);
-}
+  eliminarFactura(id: number) {
+    Swal.fire({ title: '¿Estás seguro?', text: "¡No podrás revertir esto!", icon: 'warning', showCancelButton: true, confirmButtonText: 'Sí, eliminar' })
+  .then((result) => {
+      if (result.isConfirmed) {
+        this.http.delete(`https://srrpeanqjqfxtnuwhjez.supabase.co/rest/v1/factura?id=eq.${id}`,
+          { headers: { apikey: 'sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x', Authorization: 'Bearer sb_publishable_qnp1xzi89N_0c2Yex-wbwQ_ddmCG28x' } }
+        ).subscribe({
+          next: () => { Swal.fire('¡Eliminado!', '', 'success'); this.traerFacturas(); },
+          error: () => Swal.fire('Error', 'No se pudo eliminar', 'error')
+        });
+      }
+    })
+  }
 }

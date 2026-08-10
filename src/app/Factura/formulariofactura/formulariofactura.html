@@ -1,31 +1,24 @@
-<h1>Crear Factura</h1>
-
-<form (ngSubmit)="guardarfactura()">
-
-<input
-    placeholder="Escribir número de factura"
-    name="no_factura"
-    [(ngModel)]="nuevaFactura.no_factura"
->
-
-<input
-    type="date"
-    name="fecha"
-    [(ngModel)]="nuevaFactura.fecha"
->
-
-<input
-    placeholder="Escribir código del cliente"
-    name="cod_cliente"
-    [(ngModel)]="nuevaFactura.cod_cliente"
->
-
-<input
-    placeholder="Escribir total de factura"
-    name="total_factura"
-    [(ngModel)]="nuevaFactura.total_factura"
->
-
-<button type="submit">Guardar</button>
-
-</form>
+<div class="max-w-lg mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+  <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">CREAR FACTURA</h1>
+  <form (ngSubmit)="guardarfactura()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Número de Factura</label>
+      <input placeholder="Ej: F-001" name="no_factura" [(ngModel)]="nuevaFactura.no_factura" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Fecha</label>
+      <input type="date" name="fecha" [(ngModel)]="nuevaFactura.fecha" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Código del Cliente</label>
+      <input type="number" placeholder="Ej: 1" name="cod_cliente" [(ngModel)]="nuevaFactura.cod_cliente" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Total de Factura</label>
+      <input type="number" placeholder="Ej: 50000" name="total_factura" [(ngModel)]="nuevaFactura.total_factura" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow">
+      Guardar Factura
+    </button>
+  </form>
+</div>

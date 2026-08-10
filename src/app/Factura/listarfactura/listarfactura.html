@@ -1,31 +1,40 @@
-<h1>LISTAR FACTURA</h1>
+<div class="p-6 bg-gray-100 min-h-screen">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">LISTA DE FACTURAS</h1>
+    <a routerLink="/formulariofactura" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow">
+      Nueva Factura
+    </a>
+  </div>
 
-<table> <thead> <tr> <th>ID</th> <th>No. Factura</th> <th>Fecha</th> <th>Código Cliente</th> <th>Total Factura</th> </tr> </thead>
-
-<tbody>
-
-    <tr *ngFor="let factura of facturas">
-
-        <td>{{factura.id}}</td>
-        <td>{{factura.no_factura}}</td>
-        <td>{{factura.fecha}}</td>
-        <td>{{factura.cod_cliente}}</td>
-        <td>{{factura.total_factura}}</td>
-
-        <td>
-            <button (click)="eliminarFactura(factura.id)">
-                eliminar
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <table class="w-full text-sm text-left text-gray-600">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+        <tr>
+          <th class="px-6 py-3">ID</th>
+          <th class="px-6 py-3">No. Factura</th>
+          <th class="px-6 py-3">Fecha</th>
+          <th class="px-6 py-3">Cod. Cliente</th>
+          <th class="px-6 py-3">Total</th>
+          <th class="px-6 py-3 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factura of facturas" class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium">{{factura.id}}</td>
+          <td class="px-6 py-4">{{factura.no_factura}}</td>
+          <td class="px-6 py-4">{{factura.fecha | date:'dd/MM/yyyy'}}</td>
+          <td class="px-6 py-4">{{factura.cod_cliente}}</td>
+          <td class="px-6 py-4 font-bold">${{factura.total_factura | number}}</td>
+          <td class="px-6 py-4 text-center space-x-2">
+            <button [routerLink]="['/actualizarfactura', factura.id]" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">
+              Editar
             </button>
-        </td>
-
-        <td>
-            <button (click)="llevarActualizar(factura.id)">
-                actualizar
+            <button (click)="eliminarFactura(factura.id)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs">
+              Eliminar
             </button>
-        </td>
-
-    </tr>
-
-</tbody>
-
-</table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

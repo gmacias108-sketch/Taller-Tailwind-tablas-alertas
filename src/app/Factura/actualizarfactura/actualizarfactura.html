@@ -1,31 +1,24 @@
-<h1>ACTUALIZAR FACTURA</h1>
-
-<form (ngSubmit)="actualizarFactura()">
-
-<input
-    name="no_factura"
-    placeholder="Número de factura"
-    [(ngModel)]="factura.no_factura"
->
-
-<input
-    type="date"
-    name="fecha"
-    [(ngModel)]="factura.fecha"
->
-
-<input
-    name="cod_cliente"
-    placeholder="Código del cliente"
-    [(ngModel)]="factura.cod_cliente"
->
-
-<input
-    name="total_factura"
-    placeholder="Total de factura"
-    [(ngModel)]="factura.total_factura"
->
-
-<button type="submit">Actualizar</button>
-
-</form>
+<div class="max-w-lg mx-auto mt-10 p-8 bg-white shadow-lg rounded-lg">
+  <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">ACTUALIZAR FACTURA</h1>
+  <form (ngSubmit)="actualizarFactura()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Número de Factura</label>
+      <input name="no_factura" [(ngModel)]="factura.no_factura" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Fecha</label>
+      <input type="date" name="fecha" [(ngModel)]="factura.fecha" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Código del Cliente</label>
+      <input type="number" name="cod_cliente" [(ngModel)]="factura.cod_cliente" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Total de Factura</label>
+      <input type="number" name="total_factura" [(ngModel)]="factura.total_factura" class="mt-1 w-full border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
+      Actualizar Factura
+    </button>
+  </form>
+</div>
