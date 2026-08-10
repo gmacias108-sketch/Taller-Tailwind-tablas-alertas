@@ -1,0 +1,45 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Lista de Productos</h1>
+    <button routerLink="/productos/crear" 
+      class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow">
+      + Nuevo Producto
+    </button>
+  </div>
+
+  <div class="overflow-x-auto bg-white shadow-lg rounded-2xl">
+    <table class="min-w-full">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Código</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Descripción</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Proveedor</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">P. Costo</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">P. Venta</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Foto</th>
+          <th class="px-4 py-3 text-center text-sm font-semibold">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of productos" class="border-b hover:bg-gray-50">
+          <td class="px-4 py-3">{{ p.codigo }}</td>
+          <td class="px-4 py-3">{{ p.descripcion }}</td>
+          <td class="px-4 py-3">{{ p.proveedor }}</td>
+          <td class="px-4 py-3">${{ p.precioCosto }}</td>
+          <td class="px-4 py-3">${{ p.precioVenta }}</td>
+          <td class="px-4 py-3">
+            <img [src]="p.foto" class="w-12 h-12 object-cover rounded" *ngIf="p.foto">
+          </td>
+          <td class="px-4 py-3 text-center space-x-2">
+            <button (click)="editarProducto(p)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg text-sm">
+              Editar
+            </button>
+            <button (click)="eliminarProducto(p.codigo)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
